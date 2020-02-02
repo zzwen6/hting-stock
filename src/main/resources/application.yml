@@ -1,0 +1,39 @@
+ip: local.docker.top
+
+server:
+  port: 1993
+
+spring:
+  application:
+    name: stock
+  datasource:
+    druid:
+      url: jdbc:oracle:thin:@${ip}:49162/EE.oracle.docker
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      username: stock
+      password: stock
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+
+
+api:
+  juhe:
+    # 聚合数据股票信息
+    url: http://web.juhe.cn:8080/finance/stock
+    key: 62aed31d78625633effe538a3452ef13
+  tencent:
+    # 实时资金流向
+    url: http://qt.gtimg.cn/q=ff_%s
+  netease:
+    # 网易历史数据
+    history-url: http://quotes.money.163.com/service/chddata.html
+
+
+mybatis-plus:
+  mapper-locations:
+    - classpath*:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: false
+  global-config:
+    banner: false
